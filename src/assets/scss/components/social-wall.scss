@@ -1,0 +1,182 @@
+@use '../utilities' as utilities;
+
+.social-wall {
+    padding: utilities.$space-xl 0;
+    background-color: utilities.$gray-xdk;
+    color: #fff;
+    text-align: center;
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 utilities.$space-md;
+    }
+
+    .masonry-grid {
+        margin: 0 -#{utilities.$space-md};
+        position: relative;
+    }
+
+    .post {
+        width: 100%;
+        padding: 0 utilities.$space-md;
+        margin-bottom: utilities.$space-lg;
+        
+        @include utilities.breakpoint(lg) {
+            width: 33.333%;
+        }
+        
+        @include utilities.breakpoint(md) {
+            width: 50%;
+        }
+
+        &__inner {
+            background: #fff;
+            border-radius: utilities.$border-radius;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        &__header {
+            padding: utilities.$space-md;
+            border-bottom: 1px solid utilities.$gray;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__author {
+            display: flex;
+            align-items: center;
+            gap: utilities.$space-sm;
+        }
+
+        &__avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        &__name {
+            font-size: utilities.$font-sm;
+            font-weight: 600;
+            color: utilities.$gray-dk;
+        }
+
+        &__handle {
+            color: utilities.$gray;
+            margin-left: utilities.$space-xs;
+            display: none;
+        }
+
+        &__time {
+            color: utilities.$gray;
+            font-size: 0.875rem;
+        }
+
+        &__content {
+            padding: utilities.$space-md;
+            color: utilities.$gray;
+            line-height: 1.5;
+
+            a {
+                color: utilities.$primary;
+                text-decoration: none;
+                
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+                margin: utilities.$space-sm 0;
+            }
+        }
+
+        &__media {
+            margin-top: 1rem;
+            overflow: hidden;
+            
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+            }
+        }
+
+        &__image {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+    }
+
+    .error-message,
+    .no-posts {
+        width: calc(100% - #{utilities.$space-lg * 2});
+        margin: utilities.$space-xl auto;
+        max-width: 600px;
+    }
+
+    .error-message {
+        background: rgba(utilities.$red-lt, 0.1);
+        color: utilities.$red;
+        padding: utilities.$space-lg;
+        border-radius: utilities.$border-radius;
+        font-family: utilities.$font-sans;
+        font-size: utilities.$font-sm;
+
+        small {
+            display: block;
+            margin-top: utilities.$space-sm;
+            color: utilities.$red-dk;
+            font-size: utilities.$font-xxs;
+        }
+    }
+
+    .no-posts {
+        background: rgba(utilities.$blue-lt, 0.1);
+        color: utilities.$blue;
+        padding: utilities.$space-lg;
+        border-radius: utilities.$border-radius;
+        font-family: utilities.$font-sans;
+        font-size: utilities.$font-md;
+        margin: utilities.$space-lg auto;
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .social-links {
+        text-align: center;
+        margin-top: utilities.$space-xl;
+        padding: 0 utilities.$space-md;
+
+        p {
+            font-size: utilities.$font-sm;
+            line-height: 1.5;
+        }
+
+        .separator {
+            margin: 0 utilities.$space-sm;
+            color: utilities.$gray;
+        }
+
+        a {
+            color: utilities.$primary;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: utilities.$primary-xdk;
+                text-decoration: underline;
+            }
+        }
+    }
+}

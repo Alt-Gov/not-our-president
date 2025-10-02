@@ -1,0 +1,88 @@
+@use '../utilities' as utilities;
+
+
+.slick-slider {
+    .slick-arrow {
+        position: absolute;
+        height: 70px;
+        width: 40px;
+        z-index: 1;
+        @include utilities.transition(background .3s linear, color .3s linear);
+
+        @include utilities.breakpoint(md) {
+            width: 30px;
+        }
+
+        @include utilities.breakpoint(xs) {
+            width: 30px;
+        }
+
+        &::before {
+            font-family: 'icomoon' !important;
+            color: utilities.$secondary;
+            font-size: utilities.$font-md;
+            opacity: 1;
+
+            @include utilities.breakpoint(lg) {
+                font-size: utilities.$font-lg;
+            }
+        }
+
+        &.slick-prev {
+            left: 0;
+
+            &::before {
+                content: "\e90f";
+            }
+        }
+
+        &.slick-next {
+            right: 0;
+
+            &::before {
+                content: "\e90e";
+            }
+        }
+
+        &:hover {
+            color: utilities.$primary;
+
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+
+    .slick-slide {
+        position: relative;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+
+            @include utilities.breakpoint(xs) {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.section {
+    &.primary {
+        .slick-slider {
+            .slick-arrow {
+                &::before {
+                    color: utilities.$secondary;
+                }
+
+                &:hover {
+
+                    &::before {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

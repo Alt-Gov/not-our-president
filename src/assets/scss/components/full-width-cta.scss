@@ -1,0 +1,189 @@
+@use '../utilities' as utilities;
+
+
+.full-width-cta {
+  background-size: cover;
+  color: #000;
+  padding: utilities.$space-lg;
+  position: relative;
+
+  &.has-bg {
+    padding: calc(2 * utilities.$space-xl) utilities.$space-lg;
+  }
+
+  &.has-bgimg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: calc(2 * utilities.$space-xl) utilities.$space-lg;
+
+    &.has-bg {
+      &::before {
+        content: "";
+        height: 100%;
+        left: 0;
+        opacity: .4;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+
+      &.primary {
+        &::before {
+          background: utilities.$primary;
+        }
+      }
+
+      &.secondary {
+        &::before {
+          background: utilities.$secondary;
+        }
+      }
+
+      &.tertiary {
+        &::before {
+          background: utilities.$tertiary;
+        }
+      }
+
+      &.gray {
+        &::before {
+          background: utilities.$gray-dk;
+        }
+      }
+
+      &.black {
+        &::before {
+          background: #000;
+        }
+      }
+
+      &.white {
+        &::before {
+          background: #fff;
+        }
+      }
+    }
+
+    .blurb {
+
+      &.left,
+      &.right {
+        .inner {
+          background: #fff;
+          color: #000;
+          padding: utilities.$space-lg;
+          text-align: left;
+
+          @include utilities.breakpoint(lg) {
+            width: 33%;
+          }
+
+          h2 {
+            text-align: left;
+          }
+        }
+      }
+
+      .inner {
+        color: #fff;
+        margin: 0 auto;
+        text-align: center;
+
+        h2 {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  &.primary {
+    background-color: utilities.$primary;
+  }
+
+  &.primary-lt {
+    background-color: utilities.$primary-lt;
+  }
+
+  &.primary-dk {
+    background-color: utilities.$primary-dk;
+    color: #fff;
+  }
+
+  &.secondary {
+    background-color: utilities.$secondary;
+    color: #fff;
+  }
+
+  &.tertiary {
+    background-color: utilities.$tertiary;
+  }
+
+  &.black {
+    background-color: #000;
+    color: #fff;
+  }
+
+  &.gray {
+    background-color: utilities.$gray-xl;
+
+    &::before {
+      background: rgba(#fff, .5) !important;
+    }
+  }
+
+  &.white {
+    background-color: #fff;
+
+    &::before {
+      background: rgba(#fff, .5) !important;
+    }
+  }
+
+  &.bordered {
+    background-color: #fff;
+    padding: utilities.$space-lg utilities.$space-md;
+
+    .blurb {
+      .inner {
+        border-bottom: 3px solid utilities.$primary-lt;
+        border-top: 3px solid utilities.$primary-lt;
+        padding: utilities.$space-xl 0;
+      }
+    }
+  }
+
+
+  .blurb {
+    width: 100%;
+    z-index: 2;
+
+    &.right {
+      .inner {
+        float: right;
+      }
+    }
+
+    &.left {
+      .inner {
+        float: left;
+      }
+    }
+
+    .inner {
+      margin: 0 auto;
+      text-align: center;
+
+      @include utilities.breakpoint(lg) {
+        width: 60%;
+      }
+
+      .subtitle {
+        font-size: utilities.$font-xxs;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: utilities.$space-sm;
+      }
+    }
+  }
+}

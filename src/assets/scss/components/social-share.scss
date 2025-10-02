@@ -1,0 +1,47 @@
+@use '../utilities' as utilities;
+
+.site-wrap {
+  .social-share {
+    align-items: center;
+    display: flex;
+    gap: utilities.$space-sm;
+    position: relative;
+    z-index: 1;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    span {
+      color: utilities.$secondary;
+      font-family: utilities.$font-display;
+      font-size: utilities.$font-xs;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    a {
+      background: utilities.$primary-dk;
+      color: #fff;
+      display: inline-block;
+      line-height: 43px;
+      font-size: 25px;
+      text-align: center;
+      text-decoration: none !important;
+      width: 40px;
+      height: 40px;
+      @include utilities.transition(background .3s linear);
+
+      @include utilities.breakpoint(xs) {
+        display: inline-block;
+      }
+
+      &:hover,
+      &:focus {
+        background: utilities.$primary;
+      }
+    }
+  }
+}

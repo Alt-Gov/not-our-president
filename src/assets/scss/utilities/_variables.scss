@@ -1,0 +1,74 @@
+/*COLORS*/
+$gray-xl: #f4f4f4;
+$gray-lt: #A0A0A0;
+$gray: #737373;
+$gray-md: #6f6f6f;
+$gray-dk: #3e3d3c;
+$gray-xdk: #1F1F1F;
+$red-lt: #e0938d;
+$red: #cc4b42;
+$red-dk: #8e342e;
+$orange-lt: #fcbaa9;
+$orange: #f45b1f;
+$orange-dk: #c34818;
+$gold-lt: #EFBE74;
+$gold: #EBA030;
+$gold-dk: #9a6100;
+$green-lt: #b1d235;
+$green: #9ac53c;
+$green-dk: #6aab43;
+$green-xdk: #519040;
+$blue-lt: #1994CE;
+$blue: #165D8B;
+$blue-dk: #024868;
+$blue-xdk: #002B3F;
+$teal-lt: #a5e5f2;
+$teal: #00bbde;
+$teal-dk: #0f7384;
+$purple-lt: #cea2d0;
+$purple: #9d45a2;
+$purple-dk: #521e59;
+$pink-lt: #ff92a4;
+$pink: #ff647d;
+$pink-dk: #cc5064;
+
+$primary: $green;
+$primary-lt: $green-lt;
+$primary-dk: $green-dk;
+$primary-xdk: $green-xdk;
+$secondary: $blue;
+$secondary-lt: $blue-lt;
+$secondary-dk: $blue-dk;
+$tertiary: $gold;
+$tertiary-lt: $gold-lt;
+$tertiary-dk: $gold-dk;
+
+$text: $gray-xl;
+
+/*FONTS*/
+$font-script: 'Roboto', sans-serif;
+$font-display: 'Roboto Condensed', sans-serif;
+$font-sans: 'Lato', sans-serif;
+$font-xxs: 18px;
+$font-xs: 21px;
+$font-sm: 24px;
+$font-md: 32px;
+$font-lg: 40px;
+$font-xl: 48px;
+$font-xxl: 60px;
+$font-hero: 72px;
+
+/*BORDER RADIUS*/
+$border-radius: 5px;
+$border-radius-lg: 30px;
+
+/*CSS ANIMATIONS*/
+$cubic: cubic-bezier(0.0, 0.0, 0.2, 1);
+
+/*SPACING*/
+$space-xs: 5px;
+$space-sm: 10px;
+$space-md: 20px;
+$space-lg: 30px;
+$space-xl: 50px;
+$space-xxl: 100px;

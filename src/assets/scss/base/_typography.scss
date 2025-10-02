@@ -1,0 +1,665 @@
+@use "sass:color";
+@use '../utilities' as utilities; 
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Roboto+Condensed:wght@700&family=Roboto:wght@100;500&display=swap');
+
+body {
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  font-size: utilities.$font-sm;
+  font-family: utilities.$font-sans;
+  color: utilities.$text;
+}
+
+.site-wrap,
+.offcanvas {
+  h1 {
+    font-family: utilities.$font-display;
+    font-size: utilities.$font-xl;
+    font-weight: 700;
+    line-height: 1.2em;
+    margin: 0 0 utilities.$space-md 0;
+
+    @include utilities.breakpoint(lg) {
+      font-size: utilities.$font-xxl;
+      line-height: 1em;
+    }
+  }
+
+  h2 {
+    font-family: utilities.$font-display;
+    font-size: utilities.$font-lg;
+    font-weight: 600;
+    line-height: 1.2em;
+    margin: 0 0 utilities.$space-md 0;
+
+    @include utilities.breakpoint(lg) {
+      font-size: utilities.$font-xl;
+    }
+
+    &.heading {
+      text-align: center;
+    }
+  }
+
+  h3 {
+    font-family: utilities.$font-display;
+    font-size: utilities.$font-md;
+    line-height: 1.2em;
+    margin: 0 0 utilities.$space-md 0;
+
+    @include utilities.breakpoint(lg) {
+      font-size: utilities.$font-lg;
+    }
+  }
+
+  h4 {
+    font-family: utilities.$font-display;
+    font-size: utilities.$font-sm;
+    line-height: 1.2em;
+    margin: 0 0 utilities.$space-md 0;
+
+    @include utilities.breakpoint(lg) {
+      font-size: utilities.$font-md;
+    }
+  }
+
+  h5 {
+    font-family: utilities.$font-display;
+    font-size: utilities.$font-xs;
+    letter-spacing: 1px;
+    line-height: 1.2em;
+    text-transform: uppercase;
+    margin: 0 0 utilities.$space-md 0;
+
+    @include utilities.breakpoint(lg) {
+      font-size: utilities.$font-md;
+    }
+  }
+
+  p {
+    font-size: utilities.$font-xs;
+    line-height: 1.5em;
+    margin: 0 0 utilities.$space-md 0;
+
+    &.lead {
+      text-transform: none;
+      font-weight: 700;
+      font-size: utilities.$font-sm;
+      line-height: 1.5em;
+      margin: 0 0 utilities.$space-lg 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  span {
+    &.primary {
+      color: utilities.$primary !important
+    }
+
+    &.secondary {
+      color: utilities.$secondary !important
+    }
+
+    &.tertiary {
+      color: utilities.$tertiary !important
+    }
+
+    &.script {
+      font-family: utilities.$font-script !important;
+    }
+  }
+
+  ul,
+  ol {
+    margin: 0 0 utilities.$space-lg 0;
+    padding-left: utilities.$space-md;
+
+    ul,
+    ol {
+      padding-left: utilities.$space-md;
+      margin: utilities.$space-sm 0;
+    }
+
+    &.unstyled {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    &.two-col {
+      columns: 2;
+      column-gap: utilities.$space-xl;
+
+      @include utilities.breakpoint(sm-max) {
+        columns: 1;
+      }
+
+      &.unstyled {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  ul {
+    li {
+      font-size: utilities.$font-xs;
+      line-height: 1.5em;
+      margin-bottom: utilities.$space-sm;
+    }
+
+    &.styled {
+      list-style-type: none;
+      padding: 0;
+
+      > li {
+        position: relative;
+        padding-left: utilities.$space-md;
+
+        &::before {
+          color: utilities.$secondary;
+          content: "•";
+          font-size: utilities.$font-sm;
+          left: 0;
+          position: absolute;
+          top: 0;
+        }
+
+        ul {
+          list-style-type: none;
+          padding: 0;
+
+          > li {
+            position: relative;
+            padding-left: utilities.$space-md;
+
+            &::before {
+              color: utilities.$secondary;
+              content: "•";
+              font-size: utilities.$font-sm;
+              left: 0;
+              position: absolute;
+              top: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ol {
+    counter-reset: section;
+    list-style-type: none;
+    padding: 0;
+
+    &.styled {
+      li {
+        &::before {
+          color: utilities.$tertiary;
+        }
+      }
+    }
+
+    li {
+      font-size: utilities.$font-xs;
+      line-height: 1.5em;
+      margin-bottom: utilities.$space-sm;
+      padding-left: utilities.$space-lg;
+      position: relative;
+
+      &::before {
+        counter-increment: section;
+        content: counter(section) ".";
+        font-size: utilities.$font-xs;
+        font-weight: 500;
+        left: 0;
+        line-height: 1.5em;
+        position: absolute;
+        top: 0;
+      }
+
+      ol {
+        padding: 0;
+
+        li {
+          &::before {
+            content: counter(section, lower-alpha) ".";
+          }
+        }
+      }
+    }
+  }
+
+  a {
+    color: utilities.$primary;
+    text-decoration: none;
+    @include utilities.transition(color .3s linear);
+
+    &:hover {
+      color: color.adjust(utilities.$primary, $lightness: -20%);
+      text-decoration: underline utilities.$tertiary;
+      -webkit-text-decoration-line: underline;
+      -webkit-text-decoration-color: utilities.$tertiary;
+    }
+  }
+
+  //text links on backgrounds
+
+  .primary {
+    a {
+      &:not([class*="btn"], [class*="action-link"], [class*="arrow-link"]) {
+        color: utilities.$secondary-lt;
+        font-weight: 600;
+        text-decoration: underline utilities.$secondary-lt;
+        -webkit-text-decoration-line: underline;
+        -webkit-text-decoration-color: utilities.$secondary-lt;
+
+        &:hover,
+        &:focus {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .primary-lt {
+    a {
+      &:not([class*="btn"], [class*="action-link"], [class*="arrow-link"]) {
+        color: utilities.$secondary-lt;
+        font-weight: 600;
+        text-decoration: underline utilities.$secondary-lt;
+        -webkit-text-decoration-line: underline;
+        -webkit-text-decoration-color: utilities.$secondary-lt;
+
+        &:hover,
+        &:focus {
+          color: #fff;
+          text-decoration-color: utilities.$tertiary-lt;
+          -webkit-text-decoration-line: underline;
+          -webkit-text-decoration-color: utilities.$tertiary-lt;
+        }
+      }
+    }
+  }
+
+  .primary-dk {
+    a {
+      &:not([class*="btn"], [class*="action-link"], [class*="arrow-link"]) {
+        color: utilities.$secondary-lt;
+        font-weight: 600;
+        text-decoration: underline utilities.$secondary-lt;
+        -webkit-text-decoration-line: underline;
+        -webkit-text-decoration-color: utilities.$secondary-lt;
+
+        &:hover,
+        &:focus {
+          color: #fff;
+          text-decoration-color: utilities.$tertiary-lt;
+          -webkit-text-decoration-line: underline;
+          -webkit-text-decoration-color: utilities.$tertiary-lt;
+        }
+      }
+    }
+  }
+
+  .secondary {
+    a {
+      &:not([class*="btn"], [class*="action-link"], [class*="arrow-link"]) {
+        color: utilities.$primary;
+        font-weight: 600;
+        text-decoration: underline utilities.$secondary-dk;
+        -webkit-text-decoration-line: underline;
+        -webkit-text-decoration-color: utilities.$secondary-dk;
+
+        &:hover,
+        &:focus {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .tertiary {
+    a {
+      &:not([class*="btn"], [class*="action-link"], [class*="arrow-link"]) {
+        color: utilities.$primary;
+        font-weight: 600;
+        text-decoration: underline utilities.$tertiary-dk;
+        -webkit-text-decoration-line: underline;
+        -webkit-text-decoration-color: utilities.$tertiary-dk;
+
+        &:hover,
+        &:focus {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .black {
+    a {
+      &:not([class*="btn"], [class*="action-link"], [class*="arrow-link"]) {
+        color: utilities.$secondary-lt;
+        font-weight: 600;
+        text-decoration: underline utilities.$secondary-lt;
+        -webkit-text-decoration-line: underline;
+        -webkit-text-decoration-color: utilities.$secondary-lt;
+
+        &:hover,
+        &:focus {
+          color: #fff;
+          text-decoration-color: utilities.$tertiary-lt;
+          -webkit-text-decoration-line: underline;
+          -webkit-text-decoration-color: utilities.$tertiary-lt;
+        }
+      }
+    }
+  }
+
+  .gray,
+  .white {
+    a {
+      &:not([class*="btn"], [class*="action-link"], [class*="arrow-link"]) {
+        font-weight: 600;
+      }
+    }
+  }
+
+
+  svg * {
+    @include utilities.breakpoint(sm-max) {
+      stroke-width: 4px !important;
+    }
+  }
+
+  blockquote {
+    border: none;
+    color: utilities.$primary-dk;
+    margin: utilities.$space-xl 0;
+    max-width: 800px;
+    padding: 0 0 0 utilities.$space-lg;
+    position: relative;
+
+    &::before {
+      color: utilities.$secondary;
+      font-family: utilities.$font-script;
+      font-size: utilities.$font-xl;
+      left: 0;
+    }
+
+    &.pull-right,
+    &.pull-left {
+      max-width: 400px;
+      text-align: left;
+    }
+
+    &.pull-left {
+      float: left;
+      margin: utilities.$space-sm utilities.$space-md utilities.$space-sm 0;
+    }
+
+    &.pull-right {
+      float: right;
+      margin: utilities.$space-sm 0 utilities.$space-sm utilities.$space-md;
+    }
+
+    p {
+      font-family: utilities.$font-sans, serif;
+      color: utilities.$primary;
+      font-size: utilities.$font-sm;
+      font-weight: 600;
+      line-height: 1.5em;
+    }
+
+    strong {
+      color: utilities.$primary;
+      display: block;
+      font-style: normal;
+      font-weight: 400;
+      font-family: utilities.$font-script;
+      font-size: utilities.$font-xs;
+      margin-top: utilities.$space-md;
+    }
+  }
+
+  figure {
+    margin: utilities.$space-lg 0;
+  }
+
+  figure,
+  img {
+
+    &.align-left {
+      margin: utilities.$space-sm utilities.$space-md utilities.$space-sm 0;
+    }
+
+    &.align-right {
+      margin: utilities.$space-sm 0 utilities.$space-sm utilities.$space-md;
+    }
+
+    figcaption {
+      border-bottom: 2px solid utilities.$secondary;
+      color: utilities.$gray-md;
+      font-family: utilities.$font-sans;
+      font-size: utilities.$font-xxs;
+      line-height: 1.2em;
+      margin-top: utilities.$space-sm;
+      padding-bottom: utilities.$space-sm;
+    }
+  }
+
+  img,
+  .media {
+    max-width: 100%;
+    height: auto;
+
+    @include utilities.breakpoint(xs) {
+      max-width: 100% !important;
+    }
+
+    &.full-width {
+      height: auto;
+      width: 100%;
+      margin: utilities.$space-md 0 utilities.$space-sm;
+    }
+
+    &.img-right,
+    &.align-right {
+      float: right;
+      margin-left: utilities.$space-md;
+      margin-bottom: utilities.$space-md;
+      max-width: 25vw;
+
+      @include utilities.breakpoint(sm) {
+        max-width: 50vw;
+      }
+
+      @include utilities.breakpoint(xs) {
+        float: none;
+        margin-left: 0;
+      }
+    }
+
+    &.img-left,
+    &.align-left {
+      float: left;
+      margin-right: utilities.$space-md;
+      margin-bottom: utilities.$space-md;
+      max-width: 25vw;
+
+      @include utilities.breakpoint(sm) {
+        max-width: 50vw;
+      }
+
+      @include utilities.breakpoint(xs) {
+        float: none;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .responsive-table {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .table,
+  table {
+    border: 1px solid utilities.$primary;
+    border-collapse: collapse;
+    color: utilities.$gray-dk;
+    font-size: utilities.$font-xs;
+    line-height: 1.5em;
+    margin: utilities.$space-lg 0;
+    overflow: hidden;
+    width: 100%;
+
+    &.striped {
+      tr {
+        &:nth-child(even) {
+          td {
+            background: utilities.$gray-xl;
+          }
+        }
+      }
+    }
+
+    &.secondary {
+      border: 1px solid utilities.$secondary;
+
+      tr {
+        th {
+          background: utilities.$secondary;
+        }
+
+        td {
+          border-top: 1px solid utilities.$secondary;
+        }
+      }
+    }
+
+    &.tertiary {
+      border: 1px solid utilities.$tertiary;
+
+      tr {
+        th {
+          background: utilities.$tertiary;
+        }
+
+        td {
+          border-top: 1px solid utilities.$tertiary;
+        }
+      }
+    }
+
+    tr {
+      th {
+        background: utilities.$primary;
+        border: none;
+        color: #fff;
+        font-weight: 600;
+        line-height: 1.2em;
+        padding: calc(utilities.$space-lg/2) utilities.$space-md;
+
+        &.is-active {
+          a {
+            color: utilities.$secondary;
+          }
+        }
+
+        .tablesort {
+          display: none;
+        }
+
+        a {
+          color: #fff;
+
+          &:hover,
+          &:focus {
+            color: utilities.$secondary;
+            text-decoration: none;
+          }
+
+          &::before,
+          &::after {
+            display: none;
+          }
+        }
+      }
+
+      td {
+        border: none;
+        border-top: 1px solid utilities.$primary;
+        padding: calc(utilities.$space-lg/2) utilities.$space-md;
+      }
+    }
+  }
+
+  .colors {
+    display: grid;
+    gap: 15px;
+    grid: auto / 1fr 1fr 1fr 1fr;
+    margin-bottom: utilities.$space-md;
+    width: 40%;
+
+    @include utilities.breakpoint(sm-max) {
+      width: 100%;
+    }
+
+    .color {
+      aspect-ratio: 1/1;
+      display: block;
+
+      &.primary {
+        background: utilities.$primary;
+      }
+
+      &.primary-lt {
+        background: utilities.$primary-lt;
+      }
+
+      &.primary-dk {
+        background: utilities.$primary-dk;
+      }
+
+      &.primary-xdk {
+        background: utilities.$primary-xdk;
+      }
+
+
+      &.secondary {
+        background: utilities.$secondary;
+      }
+
+      &.secondary-lt {
+        background: utilities.$secondary-lt;
+      }
+
+      &.secondary-dk {
+        background: utilities.$secondary-dk;
+      }
+
+      &.tertiary {
+        background: utilities.$tertiary;
+      }
+
+      &.tertiary-lt {
+        background: utilities.$tertiary-lt;
+      }
+
+      &.tertiary-dk {
+        background: utilities.$tertiary-dk;
+      }
+    }
+  }
+
+}

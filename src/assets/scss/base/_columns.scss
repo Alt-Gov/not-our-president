@@ -1,0 +1,181 @@
+@use '../utilities' as utilities;
+
+.grid {
+    display: grid;
+    gap: utilities.$space-lg;
+    grid-template-rows: auto;
+    align-items: stretch;
+    justify-items: stretch;
+
+    &::before,
+    &::after {
+        display: none !important;
+    }
+
+    //GUTTER SIZES
+    &.no-gutter {
+        gap: 0;
+    }
+
+    &.normal {
+        gap: utilities.$space-lg;
+    }
+
+    &.lg-gutter {
+        gap: utilities.$space-xl;
+
+        @include utilities.breakpoint(sm-max) {
+            gap: utilities.$space-lg;
+        }
+    }
+
+    //GRID COLUMNS
+    &.one {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    &.two {
+        grid-template-columns: repeat(2, 1fr);
+
+        @include utilities.breakpoint(xs) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &.three {
+        grid-template-columns: repeat(3, 1fr);
+
+        @include utilities.breakpoint(sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include utilities.breakpoint(xs) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &.four {
+        grid-template-columns: repeat(4, 1fr);
+
+        @include utilities.breakpoint(sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include utilities.breakpoint(xs) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &.five {
+        grid-template-columns: repeat(5, 1fr);
+
+        @include utilities.breakpoint(sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include utilities.breakpoint(xs) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &.six {
+        grid-template-columns: repeat(6, 1fr);
+
+        @include utilities.breakpoint(sm) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include utilities.breakpoint(xs) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    .container {
+        padding: 0;
+        width: auto !important;
+    }
+
+    .text {
+        height: 100%;
+        margin: 0;
+    }
+}
+
+.base__layout {
+    margin-bottom: utilities.$space-lg;
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    .body-text {
+        margin: 0 auto utilities.$space-lg;
+        text-align: center;
+
+        @include utilities.breakpoint(lg) {
+            width: 65%;
+        }
+
+        .heading {
+            margin: 0 0 utilities.$space-lg 0;
+        }
+    }
+
+    &.has-bg {
+        padding: utilities.$space-xl;
+
+        @include utilities.breakpoint(xs) {
+            padding: utilities.$space-lg;
+        }
+
+        &.primary {
+            background: utilities.$primary;
+        }
+
+        &.secondary {
+            background: utilities.$secondary;
+        }
+
+        &.tertiary {
+            background: utilities.$tertiary;
+        }
+
+        &.gray {
+            background: utilities.$gray-lt;
+            color: #000;
+        }
+
+        &.black {
+            background: #000;
+        }
+
+        &.white {
+            background: #fff;
+            color: #000;
+        }
+
+        &.blue {
+            background: utilities.$blue;
+        }
+
+        &.green {
+            background: utilities.$green;
+        }
+
+        &.gold {
+            background: utilities.$gold;
+        }
+
+        &.red {
+            background: utilities.$red;
+        }
+
+        &.purple {
+            background: utilities.$purple;
+        }
+    }
+
+    .container {
+        padding: 0;
+        width: auto !important;
+    }
+}

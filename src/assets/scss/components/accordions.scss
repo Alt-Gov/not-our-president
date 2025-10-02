@@ -1,0 +1,80 @@
+@use '../utilities' as utilities;
+
+.base__accordions {
+    margin: utilities.$space-lg 0;
+
+    @include utilities.breakpoint(sm-max) {
+        margin: utilities.$space-md 0;
+    }
+
+    .accordion-item {
+        border: 1px solid utilities.$primary;
+        margin-bottom: utilities.$space-md;
+
+        h4 {
+            background: utilities.$primary;
+            color: #fff;
+            cursor: pointer;
+            display: block;
+            font-size: utilities.$font-sm;
+            font-weight: 600;
+            line-height: utilities.$font-lg;
+            margin: 0;
+            padding: utilities.$space-md calc(4 * utilities.$space-md) utilities.$space-md utilities.$space-md;
+            position: relative;
+            text-transform: none;
+
+            &::after {
+                border-radius: 100%;
+                color: utilities.$secondary-lt;
+                content: "\e90d";
+                font-family: icomoon;
+                font-size: 25px;
+                height: 1.5em;
+                line-height: 1.5em;
+                position: absolute;
+                right: utilities.$space-md;
+                text-align: center;
+                top: 50%;
+                transform-origin: 50% 25%;
+                width: 1.5em;
+                @include utilities.translate(0, -50%);
+            }
+
+            &.open {
+                background: utilities.$primary-dk;
+                color: #fff;
+
+                &::after {
+                    color: #fff;
+                    content: "\e90c";
+                    line-height: 1.3em;
+                }
+
+                + div {
+                    padding: utilities.$space-md;
+                }
+            }
+
+            + div {
+                font-size: utilities.$font-md;
+                line-height: 1.5em;
+                margin: 0;
+                max-height: 0;
+                overflow: hidden;
+                padding: 0 utilities.$space-md;
+                @include utilities.transition(max-height .3s utilities.$cubic, padding .4s utilities.$cubic);
+
+                @media print {
+                    max-height: none !important
+                }
+            }
+
+            p {
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

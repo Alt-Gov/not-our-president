@@ -1,0 +1,147 @@
+@use '../utilities' as utilities;
+
+
+.base__text-card {
+  height: 100%;
+
+  .inner {
+    border-radius: utilities.$border-radius;
+    box-shadow: 10px 10px 0px rgba(#000, .1);
+    height: 100%;
+    padding: utilities.$space-lg utilities.$space-lg utilities.$space-xl;
+
+    .heading {
+      border-bottom: 2px solid;
+      padding-bottom: utilities.$space-md;
+    }
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &.primary {
+    .inner {
+      background: utilities.$primary;
+      color: #fff;
+
+      .heading {
+        border-color: utilities.$secondary-lt;
+      }
+    }
+  }
+
+  &.primary-lt {
+    .inner {
+      background: utilities.$primary-lt;
+      color: #000;
+
+      .heading {
+        border-color: utilities.$primary-dk;
+      }
+    }
+  }
+
+  &.primary-dk {
+    .inner {
+      background: utilities.$primary-dk;
+      color: #fff;
+
+      .heading {
+        border-color: utilities.$primary-lt;
+      }
+    }
+  }
+
+  &.secondary {
+    .inner {
+      background: utilities.$secondary;
+      color: #000;
+
+      .heading {
+        border-color: utilities.$secondary-dk;
+      }
+    }
+  }
+
+  &.tertiary {
+    .inner {
+      background: utilities.$tertiary;
+      color: #000;
+
+      .heading {
+        border-color: utilities.$tertiary-dk;
+      }
+    }
+  }
+
+  &.gray {
+    .inner {
+      background: utilities.$gray-xl;
+      color: #000;
+
+      .heading {
+        border-color: utilities.$primary-lt;
+      }
+    }
+  }
+
+  &.black {
+    .inner {
+      background: #000;
+      color: #fff;
+
+      .heading {
+        border-color: utilities.$secondary-lt;
+      }
+    }
+  }
+
+  &.white {
+    .inner {
+      background: #fff;
+      color: #000;
+
+      .heading {
+        border-color: utilities.$secondary-lt;
+      }
+    }
+  }
+
+  &.bordered {
+    .inner {
+      background: #fff;
+      border: 2px solid utilities.$secondary;
+      color: #000;
+
+      .heading {
+        border-color: utilities.$secondary-lt;
+      }
+    }
+  }
+}
+
+.base__layout {
+  &.one {
+    .text-card {
+      .inner {
+        padding: 90px 30px;
+        text-align: center;
+
+        @include utilities.breakpoint(sm-max) {
+          padding: 30px;
+        }
+
+        .blurb {
+          @include utilities.breakpoint(lg) {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+          }
+        }
+      }
+    }
+  }
+}

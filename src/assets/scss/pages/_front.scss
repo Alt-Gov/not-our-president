@@ -1,0 +1,23 @@
+@use '../utilities' as utilities;
+
+.front {
+    background: utilities.$gray-xdk;
+  .base__hero {
+    margin-bottom: 0;
+
+    .crumbs {
+      display: none;
+    }
+  }
+  .main {
+    margin: 0 !important;
+
+    + .feature {
+      margin-top: 0;
+    }
+
+    .content-top {
+      display: none;
+    }
+  }
+}
