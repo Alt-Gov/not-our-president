@@ -122,7 +122,7 @@
 
   .header {
     // box-shadow: 0 0 5px 5px rgba(#000, .2);
-    background: utilities.$primary-xdk;
+    background: utilities.$gray-xdk;
     color: #fff;
     padding: utilities.$space-md 0;
     position: relative;
@@ -599,7 +599,7 @@
               font-weight: 600;
               position: relative;
               text-decoration: none;
-              @include utilities.underline(utilities.$secondary);
+              @include utilities.underline(utilities.$primary);
 
               @include utilities.breakpoint(md) {
                 font-size: utilities.$font-xxs;
@@ -613,7 +613,7 @@
 
               &:focus,
               &.is-active {
-                color: utilities.$secondary;
+                color: utilities.$primary;
               }
 
               &::after {
