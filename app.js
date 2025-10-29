@@ -94,6 +94,16 @@
         return match;
     }
 
+    function buildLabelExpression(fipsList) {
+        // Build a lookup: fips -> "12,345"
+        const textMatch = ["match", ["slice", ["concat", ["to-string", ["get", "county_fips"]]], -5]];
+        for (const d of fipsList) {
+            textMatch.push(d.fips, d.value.toLocaleString());
+        }
+        textMatch.push(""); // fallback: no label
+        return textMatch;
+    }
+
     async function updateYear(year) {
         currentYear = year;
         const fipsList = await getFipsList(year);
@@ -110,6 +120,18 @@
         if (map.getLayer("snap-counties-fill")) {
             map.setFilter("snap-counties-fill", filter);
             map.setPaintProperty("snap-counties-fill", "fill-color", colorExpr);
+        }
+
+        const labelFilterNew = [
+            "in",
+            ["slice", ["concat", ["to-string", ["get", "county_fips"]]], -5],
+            ["literal", fipsList.map(d => d.fips)]
+        ];
+        const labelExprNew = buildLabelExpression(fipsList);
+
+        if (map.getLayer("snap-counties-labels")) {
+            map.setFilter("snap-counties-labels", labelFilterNew);
+            map.setLayoutProperty("snap-counties-labels", "text-field", labelExprNew);
         }
 
         // update button states
@@ -147,6 +169,52 @@
             },
             beforeId
         );
+
+        // ---- County labels on centroid points ----
+        const POINTS_SOURCE_LAYER = "albersusa-points"; // confirmed from your style
+        const labelFilter = [
+            "in",
+            ["slice", ["concat", ["to-string", ["get", "county_fips"]]], -5],
+            ["literal", fipsList.map(d => d.fips)]
+        ];
+        const labelExpr = buildLabelExpression(fipsList);
+
+        if (!map.getLayer("snap-counties-labels")) {
+            map.addLayer({
+                id: "snap-counties-labels",
+                type: "symbol",
+                source: "composite",
+                "source-layer": POINTS_SOURCE_LAYER,
+                filter: labelFilter,
+                layout: {
+                    "text-field": labelExpr,
+                    "text-font": ["Inter Medium", "Arial Unicode MS Regular"],
+                    "text-size": [
+                        "interpolate", ["linear"], ["zoom"],
+                        4, 9,
+                        6, 10.5,
+                        8, 12,
+                        10, 13
+                    ],
+                    "text-anchor": "center",
+                    "symbol-placement": "point",
+                    "text-allow-overlap": false
+                },
+                paint: {
+                    "text-color": "#fff",
+                    // "text-halo-color": "#ffffff",
+                    "text-halo-width": 1.2,
+                    "text-halo-blur": 0.5,
+                    "text-opacity": [
+                        "interpolate", ["linear"], ["zoom"],
+                        4, 0,      // hidden at low zooms
+                        5.5, 0.75, // fade in
+                        7, 1
+                    ]
+                },
+                minzoom: 8 // don’t clutter low zoom
+            }, "county-boundaries"); // keep labels above fills but below any higher-priority labels
+        }
 
         // Attach year-toggle handlers
         document.querySelectorAll("#year-controls button").forEach(btn => {
