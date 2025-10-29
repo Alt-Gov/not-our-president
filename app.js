@@ -34,6 +34,35 @@
             .map(([fips, val]) => ({ fips: fips.padStart(5, "0"), value: val }));
     }
 
+    function updateLegend(values, colors) {
+        const legend = document.querySelector("#legend .swatches");
+        if (!legend) return;
+        legend.innerHTML = "";
+
+        // Compute log10 stops
+        const logVals = values.map(v => Math.log10(v));
+        const min = Math.min(...logVals);
+        const max = Math.max(...logVals);
+        const step = (max - min) / (colors.length - 1);
+
+        for (let i = 0; i < colors.length; i++) {
+            const lower = Math.pow(10, min + step * i);
+            const upper = Math.pow(10, min + step * (i + 1));
+            const label =
+                i === colors.length - 1
+                    ? `>${Math.round(lower).toLocaleString()}`
+                    : `${Math.round(lower).toLocaleString()}–${Math.round(upper).toLocaleString()}`;
+
+            const sw = document.createElement("div");
+            sw.className = "swatch";
+            sw.innerHTML = `
+      <div class="color-box" style="background:${colors[i]}"></div>
+      <div class="label">${label}</div>`;
+            legend.appendChild(sw);
+        }
+    }
+
+
     // Create a Mapbox expression for color based on log scale
     function buildColorExpression(fipsList) {
         const values = fipsList.map(d => d.value);
@@ -60,6 +89,8 @@
             match.push(d.fips, COLORS[idx]);
         });
         match.push("#ccc"); // fallback
+        updateLegend(values, COLORS);
+
         return match;
     }
 
@@ -86,6 +117,7 @@
             btn.classList.toggle("active", btn.dataset.year === String(year));
         });
     }
+
 
     map.on("load", async () => {
         const res = await fetch(LOOKUP_URL);
