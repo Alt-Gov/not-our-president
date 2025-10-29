@@ -2,15 +2,20 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Not Our President: Stories from Federal Workers</title>
-    <meta name="description"
-        content="Stories, letters, and essays from federal employees and contractors on why Donald J. Trump is not our president." />
-    <link rel="stylesheet" href="dist/assets/css/styles.min.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SNAP Households Across the US</title>
+  <meta name="description"
+    content="Donald Trump and his cronies don't care about millions of Americans who will starve without SNAP." />
+  <link rel="stylesheet" href="dist/assets/css/styles.min.css" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+
+  <!-- Chart.js for the state trend panel -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 
-<body class="site-wrap front">
+<body class="site-wrap map">
   <header class="header">
     <div class="container">
       <div class="inner">
@@ -31,25 +36,43 @@
       </div>
     </div>
   </header>
+  <section class="base__hero">
+    <div class="blurb">
+      <div class="inner">
+        <h1>SNAP Households across the US</h1>
+        <p>Donald Trump and his cronies don't care about millions of Americans who will starve without SNAP.</p>
 
-    <section class="hero">
-        <div class="inner">
-            <h1>Voices from Inside Government</h1>
-            <p>Federal employees and contractors speak truth about why Donald J. Trump is not our president.</p>
-            <a href="#stories" class="btn">Read Stories</a>
-            <a href="#contribute" class="btn secondary">Share Your Voice</a>
+        <div id="year-controls" class="btn-group year-toggle">
+          <button data-year="2024" class="btn primary">2024</button>
+          <button data-year="2023" class="btn primary">2023</button>
+          <button data-year="2022" class="btn primary">2022</button>
+          <button data-year="2021" class="btn primary">2021</button>
+          <button data-year="2020" class="btn primary">2020</button>
         </div>
-    </section>
-    <section id="mission">
-        <div class="container">
+        <small>Data sourceed from <a href="https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap" target="_blank">USDA FNS</a> website. Not all states report at the county level.</small>
+      </div>
+    </div>
+  </section>
 
-        </div>
-    </section>
-    <section id="stories">
-        <div class="container">
+  <div id="app">
+    <div id="map"></div>
+  </div>
 
-        </div>
-    </section>
+
+  <script>
+
+    // Expose config for the JS bundle (we'll add app.js next)
+    window.APP_CONFIG = {
+      mapboxToken: "pk.eyJ1IjoibHlubnN0YWhsIiwiYSI6ImNsMXYzYTlhdjJ4c2QzYmp4Mm5iemV5czYifQ.5PzaoqQ4m2BJKkKo2ln3Sg",
+      mapStyle: "mapbox://styles/lynnstahl/cmhc3o1h5004q01qu3snzehqi",
+      countyLookupUrl: "snap_households_county_2020_2024.json",
+      year: 2024
+    };
+
+
+
+  </script>
+  <script src="app.js"></script>
 </body>
 
 </html>
