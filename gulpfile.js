@@ -11,6 +11,7 @@ const { deleteAsync } = require('del');
 const browserSync = require('browser-sync').create();
 const gulpif = require('gulp-if');
 const fs = require('fs');
+const twig = require('gulp-twig');
 
 // Configuration
 const config = {
@@ -18,6 +19,11 @@ const config = {
         scss: 'src/assets/scss/**/*.scss',
         js: ['ovary-roll.js', 'script.js'].map(file => `src/assets/js/${file}`),
         html: './*.html'
+    },
+    twig: {
+        src: 'src/pages/**/*.twig',
+        watch: 'src/**/*.twig',
+        dest: 'dist'
     },
     dest: {
         css: 'dist/assets/css',
@@ -67,7 +73,7 @@ function scripts() {
     return gulp.src(config.src.js, { allowEmpty: true })
         .pipe(gulpif(!config.isProduction, sourcemaps.init()))
         .pipe(concat('script.js'))
-        .pipe(terser().on('error', function(e) {
+        .pipe(terser().on('error', function (e) {
             console.error(e);
             this.emit('end');
         }))
@@ -82,6 +88,17 @@ function html() {
     ensureDirectoriesExist();
     return gulp.src(config.src.html)
         .pipe(gulp.dest(config.dest.dist));
+}
+
+function twigTemplates() {
+    ensureDirectoriesExist();
+    return gulp.src(config.twig.src)
+        .pipe(twig().on('error', function (err) {
+            console.error('Twig error:', err.message);
+            this.emit('end');
+        }))
+        .pipe(gulp.dest(config.twig.dest))
+        .pipe(browserSync.stream());
 }
 
 // BrowserSync server
@@ -101,20 +118,21 @@ function serve() {
 function watch() {
     gulp.watch(config.src.scss, styles);
     gulp.watch(config.src.js, scripts);
+    gulp.watch(config.twig.watch, twigTemplates);
     gulp.watch(config.src.html).on('change', browserSync.reload);
 }
 
 // Build task for production
 const build = gulp.series(
     clean,
-    gulp.parallel(styles, scripts),
+    gulp.parallel(styles, scripts, twigTemplates),
     html
 );
 
 // Development task
 const dev = gulp.series(
     clean,
-    gulp.parallel(styles, scripts),
+    gulp.parallel(styles, scripts, twigTemplates),
     gulp.parallel(serve, watch)
 );
 

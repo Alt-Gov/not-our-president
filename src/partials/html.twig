@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }}</title>
+    <meta name="description" content="{{desc}}" />
+    <link rel="stylesheet" href="/dist/assets/css/styles.min.css" />
+  </head>
+
+  <body class="site-wrap {{wrap}}">
+    {% block content %}
+      {% include "header.twig" %}
+          <main>
+              {% block content %}{% endblock %}
+          </main>
+          {% include "footer.twig" %}
+    {% endblock %}
+  </body>
+  {% block scripts %}
+  {% endblock %}
+</html>

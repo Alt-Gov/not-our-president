@@ -1,18 +1,22 @@
 @use '../utilities' as utilities;
 
 .front {
-    background: utilities.$gray-xdk;
+  background: utilities.$gray-xdk;
+
   .base__hero {
+    align-content: center;
+    height: 100vh;
     margin-bottom: 0;
 
     .crumbs {
       display: none;
     }
   }
+
   .main {
     margin: 0 !important;
 
-    + .feature {
+    +.feature {
       margin-top: 0;
     }
 

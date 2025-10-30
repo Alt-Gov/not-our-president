@@ -1,0 +1,13 @@
+{% extends "html.twig" %}
+
+{% block content %}
+    <body>
+    {% include "header.twig" %}
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        {% include "footer.twig" %}
+    </body>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

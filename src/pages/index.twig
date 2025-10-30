@@ -1,0 +1,34 @@
+{% extends "../partials/html.twig" %}
+{% set title = "Not Our President: Stories from Federal Workers" %}
+{% set desc = "Stories, letters, and essays from federal employees and contractors on why Donald J. Trump is not our president." %}
+{% set wrap = "front" %}
+
+{% block content %}
+
+{% embed "../components/hero.twig" with {
+  heroTitle: "Donald J. Trump is not our president."
+} %}
+  {% block hero_content %}
+    <p>His adminstration does not represent us nor do they care about us. The federal government has effectively been dismantled and as of Nov 1, millions will lose access to life-sustaining SNAP benefits.</p>
+    <a href="snap.html" class="btn primary">See SNAP data</a>
+    {# <a href="#contribute" class="btn secondary">Share Your Voice</a> #}
+  {% endblock %}
+{% endembed %}
+
+
+    <section class="hero">
+        <div class="inner">
+            
+        </div>
+    </section>
+    <section id="mission">
+        <div class="container">
+
+        </div>
+    </section>
+    <section id="stories">
+        <div class="container">
+
+        </div>
+    </section>
+{% endblock %}

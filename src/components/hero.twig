@@ -1,0 +1,26 @@
+{% set hasImg = heroImage is defined and heroImage %}
+{% set hasVideo = heroBackgroundVideo is defined and heroBackgroundVideo %}
+{% set hasText = block('hero_content') is not empty %}
+
+<div class="base__hero {{ hasImg ? 'has-img' : '' }} {{ hasVideo ? 'has-video' : '' }} {{ hasText ? 'has-text' : '' }}">
+  {% if hasImg %}
+    <div class="img">{{ heroImage }}</div>
+  {% endif %}
+
+  {% if hasVideo %}
+    <div class="video">{{ heroBackgroundVideo }}</div>
+  {% endif %}
+
+  <div class="blurb">
+    <div class="container">
+      <div class="inner">
+        {% if heroTitle %}
+          <h1>{{ heroTitle }}</h1>
+        {% endif %}
+        <div class="intro">
+          {% block hero_content %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
