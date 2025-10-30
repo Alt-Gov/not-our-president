@@ -17,7 +17,7 @@ const twig = require('gulp-twig');
 const config = {
     src: {
         scss: 'src/assets/scss/**/*.scss',
-        js: ['ovary-roll.js', 'script.js'].map(file => `src/assets/js/${file}`),
+        js: 'src/assets/js/**/*.js',
         html: './*.html'
     },
     twig: {
@@ -72,7 +72,6 @@ function scripts() {
     ensureDirectoriesExist();
     return gulp.src(config.src.js, { allowEmpty: true })
         .pipe(gulpif(!config.isProduction, sourcemaps.init()))
-        .pipe(concat('script.js'))
         .pipe(terser().on('error', function (e) {
             console.error(e);
             this.emit('end');

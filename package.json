@@ -2,7 +2,7 @@
   "name": "not-our-president",
   "version": "1.0.0",
   "description": "A responsive static website for not-our-president.org",
-  "main": "src/index.html",
+  "main": "dist/index.html",
   "scripts": {
     "build": "gulp",
     "watch": "gulp watch"
