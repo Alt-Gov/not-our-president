@@ -17,6 +17,7 @@ const twig = require('gulp-twig');
 const config = {
     src: {
         scss: 'src/assets/scss/**/*.scss',
+        data: 'src/data/**/*',
         js: 'src/assets/js/**/*.js',
         html: './*.html'
     },
@@ -27,6 +28,7 @@ const config = {
     },
     dest: {
         css: 'dist/assets/css',
+        data: 'dist/data/',
         js: 'dist/assets/js',
         dist: 'dist'
     },
@@ -89,6 +91,15 @@ function html() {
         .pipe(gulp.dest(config.dest.dist));
 }
 
+// Data task - copy all data files to dist/data
+function data() {
+    ensureDirectoriesExist();
+    return gulp.src(config.src.data, { allowEmpty: true })
+        .pipe(gulp.dest(config.dest.data))
+        .pipe(browserSync.stream());
+}
+
+// Twig task
 function twigTemplates() {
     ensureDirectoriesExist();
     return gulp.src(config.twig.src)
@@ -104,9 +115,9 @@ function twigTemplates() {
 function serve() {
     browserSync.init({
         server: {
-            baseDir: './',
+            baseDir: './dist',
             routes: {
-                "/src": "src"
+                "/dist": "dist"
             }
         },
         notify: false
@@ -115,7 +126,8 @@ function serve() {
 
 // Watch task
 function watch() {
-    gulp.watch(config.src.scss, styles);
+    gulp.watch(config.src.data, data);
+    gulp.watch(config.src.scss, styles);    
     gulp.watch(config.src.js, scripts);
     gulp.watch(config.twig.watch, twigTemplates);
     gulp.watch(config.src.html).on('change', browserSync.reload);
@@ -124,14 +136,14 @@ function watch() {
 // Build task for production
 const build = gulp.series(
     clean,
-    gulp.parallel(styles, scripts, twigTemplates),
+    gulp.parallel(styles, scripts, twigTemplates, data),
     html
 );
 
 // Development task
 const dev = gulp.series(
     clean,
-    gulp.parallel(styles, scripts, twigTemplates),
+    gulp.parallel(styles, scripts, twigTemplates, data),
     gulp.parallel(serve, watch)
 );
 
