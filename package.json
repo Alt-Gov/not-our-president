@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "gulp": "^5.0.1",
-    "gulp-twig": "^1.2.0",
+    "gulp-twig": "^1.2.0"
   },
   "devDependencies": {
     "breakpoint-sass": "^3.0.0",
